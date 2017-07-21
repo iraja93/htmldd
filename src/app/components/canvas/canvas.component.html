@@ -1,0 +1,802 @@
+
+<div class="col-md-10 nopadding">
+<!-- Start of Panel Heading Content. --> 
+    <div class="panel-heading">
+            
+           <!-- Preview Modals -->
+                 <span class="pull-left">
+                     <div class="nav navbar-nav pull-left">
+                          <button type="button" class="btn btn-primary button-canvas-preview" data-toggle="modal" (click)="getHTMLCode()" data-target="#modalPreview">Preview</button>
+
+                           <!--<button type="button" class="btn btn-primary button-canvas-preview" data-toggle="modal" data-target="#modalOpen">Open</button>-->
+                           <button type="button"  id="openModal" #openModal [hidden]="true" data-toggle="modal" data-target="#modalopenNew"></button>
+                         
+                        <span class="icon" title="Mobile Preview">
+                            <a href="#modalMobile" class="icon-white" data-toggle="modal" (click)="getHTMLCode()" >
+                                <i class="fa fa-mobile fa-lg" aria-hidden="true"></i>
+                            </a>
+                         </span>
+                         <span class="icon" title="Tablet Preview">
+                            <a href="#modalTab" class="icon-white" data-toggle="modal" (click)="getHTMLCode()">
+                                <i class="fa fa-tablet fa-lg" aria-hidden="true"></i>
+                             </a>
+                         </span>
+                         <span class="icon" title="Desktop Preview">
+                            <a href="#modalDesktop" class="icon-white" data-toggle="modal" (click)="getHTMLCode()">
+                                <i class="fa fa-desktop fa-lg" aria-hidden="true"></i>
+                             </a>
+                         </span>
+                         
+                        
+                     </div>
+                </span>
+            <!-- End of Preview Modals -->
+
+            <!-- Icons for all Modals -->
+             <span>
+                                <h6 style="color:white;" class="pull-right">Project Name: {{openProject}}</h6>
+                         </span>
+                <span class="pull-right">
+                    <div class="nav navbar-nav pull-right" *ngIf="canvasJson?.length > 0">
+                        <span class="icon" title="Create view">
+                         <button class="button-canvas" data-toggle="modal" data-target="#modalCreate"> 
+                                 <i class="fa fa-files-o" aria-hidden="true"></i>
+                           </button>
+
+                        </span>
+                        <span class="icon" title="save">
+                            <button class="button-canvas" data-toggle="modal" (click)="saveJSONFile()"> 
+                                 <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                           </button>
+                        </span>
+                        <span class="icon" title="play">
+                            <button class="button-canvas" data-toggle="modal"> 
+                                 <i class="fa fa-1x fa-play" aria-hidden="true"></i>
+                           </button>
+                        </span>
+                        <span class="icon" title="delete">
+                            <button class="button-canvas" data-toggle="modal" (click)="deleteFile()"> 
+                                <i class="fa fa-1x fa-trash" aria-hidden="true"></i>
+                           </button>
+                        </span>
+                       <span class="icon" title="Download">
+                           <button class="button-canvas" data-toggle="modal" (click)="downloadFile()"> 
+                                <i class="fa fa-download" aria-hidden="true"></i> 
+                           </button>
+                            
+                       </span>
+                        
+                        <span class="icon" title="export">
+                            <button class="button-canvas" data-toggle="modal" data-target="#modalExport"> 
+                                 <i class="fa fa-paper-plane" aria-hidden="true" ></i>
+                           </button>        
+                         </span>
+                        <span class="icon" title="Html Preview">
+                             <button class="button-canvas" data-toggle="modal" data-target="#modalHtml" (click)="getHTMLCode();chageModalButtonBackToOriginal()"> 
+                                 <i class="fa fa-1x fa-code" aria-hidden="true"  ></i>
+                           </button>
+                         </span>
+                        <span class="icon" title="json preview">
+                             <button class="button-canvas" data-toggle="modal" data-target="#modalJson" (click)="chageModalButtonBackToOriginal()"> 
+                                 <i class="fa fa-file-code-o" aria-hidden="true" ></i>
+                           </button>
+                       </span>
+                       
+                    </div>
+                </span>
+            <!-- End of Icons for all Modals -->
+    </div>
+<!-- End of Panel Heading -->
+
+<!-- Start of Panel-body -->
+    <div class="well panel-body-canvas" >
+
+        <div class="alert alert-success alert-dismissable" *ngIf="alertFlag">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <p>{{alertMsg}}</p> 
+  </div>
+        
+        <div class="modalScrollbar scroll" >
+
+<!--
+            <div class="ngx-dnd-container" ngxDroppable dropZone="builder-target" 
+            
+            >
+
+            <div class="ngx-dnd-item" *ngFor="let">
+            
+            
+            
+            </div>
+            </div>-->
+          <ngx-dnd-container
+           
+            [model]="canvasJson"
+            dropZone="builder-target"
+            [removeOnSpill]="true"
+           
+            (drag)="log($event)"
+            (drop)="onFirstDrop($event)"
+            (over)="log($event)"
+            (out)="log($event)"
+            (remove)="selectedItemRemove($event)">
+
+            <ng-template let-model="model" let-template="template" let-i="index">
+              <div [ngSwitch]="model.type" >
+                <div *ngSwitchCase="'container'" >
+                    <p class="canvas-text pull-right">{{model.name}}</p>
+                     <ngx-dnd-container
+                       
+                       dropZone="builder-target"
+                       [model]="model.columns"
+                       [ngModel]="model"
+                       [removeOnSpill]="true"
+                       [template]="template"
+                       (drag)="log($event)"
+                       (drop)="onDrop($event)"
+                       (over)="log($event)"
+                       (out)="log($event)"
+                       (remove)="selectedItemRemove($event)"
+                        [ngClass]="model.cssClass"
+                       
+                       ngDefaultControl
+                     (click)="selectedItemChange(model)"
+                       >
+                     </ngx-dnd-container>
+                   
+                </div>
+
+                <div *ngSwitchCase="'template'">
+
+
+                    <div [ngClass]="{'selectborder':selectedElement==model,'item':selectedElement!=model}" (click)="selectedItemChange(model);$event.stopPropagation()">
+
+<span [title]="model.name" class="pull-right" [ngClass]="{'span-selected':selectedElement==model,'span-notSelect':selectedElement!=model}">{{model.name}}</span>
+
+                                      <ngx-input
+                    [type]="model.inputType"
+                    [hint]="model.name"
+                    [autofocus]="false"
+                    [ngModel]="model"
+                    [innerHtml]="model.templates | safeHtml"
+                                      >
+                  </ngx-input>
+
+                </div>
+
+                </div>
+                <div *ngSwitchDefault>
+                        <div [ngClass]="{'selectborder':selectedElement==model,'item':selectedElement!=model}" (click)="selectedItemChange(model);$event.stopPropagation()">
+<span [title]="model.name" class="pull-right span-notSelect" [ngClass]="{'span-selected':selectedElement==model}">{{model.name}}</span>
+
+                                
+                  <ngx-input
+                    [type]="model.inputType"
+                    [hint]="model.name"
+                    [autofocus]="false"
+                    [ngModel]="model"
+                    [innerHtml]="model.templates | safeHtml"
+                   >
+                  </ngx-input>
+
+                </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngx-dnd-container>
+        </div>
+
+
+
+      </div>
+</div>
+<div class="col-sm-2 col-md-2 col-lg-2 nopadding" style="color:white;">
+    <div *ngIf="flag"> 
+        <div class="propScrollbar property-scrollBar">
+          
+           <ul class="nav nav-tabs nav-justified">
+              <li><a data-toggle="tab" title="Style" href="#style" class="icons"><i class="fa fa-paint-brush" ></i></a></li>
+              <li><a data-toggle="tab" title="Option" href="#option" class="icons"><i class="fa fa-star" aria-hidden="true"></i></a></li> 
+              <li><a data-toggle="tab" title="Attribute" href="#attribute" class="icons"><i class="fa fa-cog" aria-hidden="true"></i></a></li>      
+           </ul> 
+           <div class="tab-content">
+               <div id="style" class="tab-pane fade">
+                    <div *ngFor="let element of selectedElement.styles;let i=index;">
+                       <div class="form-group">
+                            <h5>{{element.displayName}}</h5>
+                            <input type="text" class="form-control" placeholder={{element.placeholder}} [(ngModel)]="element[i]"     (ngModelChange)="changeStylesAndProperties(element.name,element[i],'styles')" *ngIf="element.values==undefined">
+          
+                        <select class="form-control" *ngIf="element.values!=undefined" [(ngModel)]="element[i]"     (ngModelChange)="changeStylesAndProperties(element.name,element[i],'styles')">
+                            <option *ngFor="let attrVal of element.values | keys; let i=index;" [ngValue]="attrVal.value">{{attrVal.key}}</option>
+                        </select>
+        
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div id="option" class="tab-pane fade">
+                 <h5>External CSS classes</h5>
+                <div class="form-group">
+                    <span>
+                       <tag-input style="padding : 0 0.2rem 0 0.2rem  !important;" [(ngModel)]="externalCSSArray" (ngModelChange)="convertToString('ExternalCss','Options')" [modelAsStrings]="true" [editable]="true"  [dragZone]="'zone1'"  [ripple]="true" theme='minimal' placeholder="+ Add External CSS"> 
+                </tag-input>  
+                    </span>
+                    </div> 
+
+                <!-- Responsive Visibility Section -->
+                 <div class="panel-group" id="accordion">
+                 <div class="panel">
+                 <div class=" panel-head accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                     <h4 class="panel-title">Resonsive Visibility</h4>
+                 </div>
+                 <div id="collapseOne" class="panel-collapse collapse">
+                 <div class="panel-body" style="background-color:#384247">
+                    <div class="form-group">
+                        <div class="table-responsive borderless">          
+                            <table class="table borderless">
+                                <tbody class="borderless">
+                                    <tr>
+                                        <td>Visible-xs-block</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="visible-xs-block"  (click)="addToexternalCSSArray('visible-xs-block')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                     <tr>
+                                        <td>Visible-sm-block</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" name="checkbox-sm" value="visible-sm-block"  (click)="addToexternalCSSArray('visible-sm-block')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                     <tr>
+                                        <td>Visible-md-block</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="visible-md-block"  (click)="addToexternalCSSArray('visible-md-block')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                     <tr>
+                                        <td>Visible-xs-inline</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="visible-xs-inline"  (click)="addToexternalCSSArray('visible-xs-inline')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                     <tr>
+                                        <td> Visible-sm-inline</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="visible-sm-inline"  (click)="addToexternalCSSArray('visible-sm-inline')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                     <tr>
+                                        <td>Visible-lg-inline</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="visible-lg-inline"  (click)="addToexternalCSSArray('visible-lg-inline')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                     <tr>
+                                        <td>Visible-xs-inline-block</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="visible-xs-inline-block"  (click)="addToexternalCSSArray('visible-xs-inline-block')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                     <tr>
+                                        <td>Visible-sm-inline-block</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="visible-sm-inline-block"  (click)="addToexternalCSSArray('visible-sm-inline-block')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                     <tr>
+                                        <td>Visible-md-inline-block</td>
+                                       <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="visible-md-inline-block" (click)="addToexternalCSSArray('visible-md-inline-block')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                     <tr>
+                                        <td>Visible-lg-inline-block</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="visible-lg-inline-block"  (click)="addToexternalCSSArray('visible-lg-inline-block')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                       </td> 
+                                     </tr>
+                                     <tr>
+                                        <td>hidden-xs</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="hidden-xs" (click)="addToexternalCSSArray('hidden-xs')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                     <tr>
+                                        <td>hidden-sm</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="hidden-sm" (click)="addToexternalCSSArray('hidden-sm')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                     <tr>
+                                        <td>hidden-md</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="hidden-md" (click)="addToexternalCSSArray('hidden-md')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                     <tr>
+                                        <td>hidden-lg</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" value="hidden-lg"  (click)="addToexternalCSSArray('hidden-lg')">
+                                                <div class="slider round"></div>
+                                            </label>
+                                        </td> 
+                                     </tr>
+                                </tbody>
+                            </table>
+                         </div>
+                         </div>
+                        </div>
+                        </div>
+                        </div>
+                     </div>     
+                <!-- End of Responsive Visibility Section -->
+
+                
+                <div *ngFor="let element of selectedElement.Options">
+                    <div class="form-group">
+                        <div *ngFor="let attrVal of element | keys; let i=index;"> 
+                            <h5>{{attrVal.key}}</h5>
+                            <select class="form-control" [(ngModel)]="attrVal[i]" (ngModelChange)="changeStylesAndProperties(attrVal.key,attrVal[i],'Options')">
+                            <option *ngFor="let val of attrVal.value | keys; let i=index;" [ngValue]="val.value">{{val.key}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div id="attribute" class="tab-pane fade">
+                <div *ngFor="let element of selectedElement.attributes;let i=index;">
+                    <div class="form-group" *ngIf="element.displayName!=undefined">
+                        <h5>{{element.displayName}}</h5>
+                        <input class="form-control" type="element.inputType" [(ngModel)]="element.value" (ngModelChange)="changeStylesAndProperties(element.name,element.value,'attributes')" *ngIf="element.attrValue==undefined">
+                        <select class="form-control" *ngIf="element.attrValue!=undefined" [(ngModel)]="element[i]" (ngModelChange)="changeStylesAndProperties(element.name,element[i],'attributes')">
+                        <option *ngFor="let attrVal of element.attrValue | keys; let i=index;" [ngValue]="attrVal.value">{{attrVal.key}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div *ngIf="selectedElement.subtype=='labeltype'">
+                    <div *ngFor="let element of selectedElement.label">
+                        <div class="form-group">
+                            <h5>Label</h5>
+                            <!--<label style="background: rgb(0, 160, 234);">Label</label>-->
+                            <textarea  class="form-control" [(ngModel)]="element.labeltext" (ngModelChange)="changeStylesAndProperties(element.name,element.labeltext,'label')"></textarea>
+                        </div>
+                    </div>
+                </div>   
+            </div>     
+        </div>
+        </div>
+    </div> 
+
+
+
+
+<!--<div *ngIf="flag">
+
+<span>Attributes</span>
+<div *ngFor="let element of selectedElement.attributes;let i=index;">
+<div class="form-group" *ngIf="element.displayName!=undefined">
+
+<label>{{element.displayName}}</label>
+<input class="form-control" type="element.inputType" [(ngModel)]="element.value" (ngModelChange)="changeStylesAndProperties(element.name,element.value,'attributes')" *ngIf="element.attrValue==undefined">
+<select class="form-control" *ngIf="element.attrValue!=undefined" [(ngModel)]="element[i]" (ngModelChange)="changeStylesAndProperties(element.name,element[i],'attributes')">
+        <option *ngFor="let attrVal of element.attrValue | keys; let i=index;" [ngValue]="attrVal.value">{{attrVal.key}}</option>
+      </select>
+</div>
+</div>
+<div *ngIf="selectedElement.subtype=='labeltype'">
+    <span>Label</span>
+<div *ngFor="let element of selectedElement.label">
+<div class="form-group">
+    <label>Label</label>
+    <textarea  class="form-control" [(ngModel)]="element.labeltext" (ngModelChange)="changeStylesAndProperties(element.name,element.labeltext,'label')"></textarea>
+    
+          
+</div>
+</div>
+
+</div>
+
+
+<span>Options</span>
+<div>
+
+<h5>External CSS Classes</h5>
+        <tag-input [(ngModel)]="externalCSSArray" (ngModelChange)="convertToString('ExternalCss','Options')" [modelAsStrings]="true" [editable]="true"  [dragZone]="'zone1'"  [ripple]="true" placeholder="+ Add External CSS">
+        </tag-input>
+
+
+</div>
+<div *ngFor="let element of selectedElement.Options">
+<div class="form-group">
+    <div *ngFor="let attrVal of element | keys; let i=index;"> 
+                <label>{{attrVal.key}}</label>
+         <select class="form-control" [(ngModel)]="attrVal[i]" (ngModelChange)="changeStylesAndProperties(attrVal.key,attrVal[i],'Options')">
+        <option *ngFor="let val of attrVal.value | keys; let i=index;" [ngValue]="val.value">{{val.key}}</option>
+      </select>
+
+    </div>
+    
+</div>
+</div>
+
+<div>
+<h5> Styles </h5>
+
+<div *ngFor="let element of selectedElement.styles;let i=index;">
+    <div class="form-group">
+        <label>{{element.displayName}}</label>
+        <input type="text" class="form-control" placeholder={{element.placeholder}} [(ngModel)]="element[i]" (ngModelChange)="changeStylesAndProperties(element.name,element[i],'styles')" *ngIf="element.values==undefined">
+        
+        <select class="form-control" *ngIf="element.values!=undefined" [(ngModel)]="element[i]" (ngModelChange)="changeStylesAndProperties(element.name,element[i],'styles')">
+        <option *ngFor="let attrVal of element.values | keys; let i=index;" [ngValue]="attrVal.value">{{attrVal.key}}</option>
+      </select>
+        
+    </div>
+</div>
+
+
+
+</div>
+</div>-->
+
+</div>
+
+<div class="col-md-12">
+<div class="form-group col-md-6">
+<input type="text" class="form-control" [(ngModel)]="saveProject">
+<button (click)="saveJSONFile()" class="btn btn-primary">Save Project</button>
+</div>
+</div>
+
+<!-- End of Panel Body -->
+
+<!--  All Modals Content are given below  -->
+<!-- Create Template Modal -->
+<!--MODAL-->
+<div class="modal fade" id="modalCreate" role="dialog">
+    <div class="modal-dialog">
+                    
+        <!--MODAL CONTENT-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                <h4 class="modal-title">Create View</h4>
+            </div>
+            <form>
+            <div class="modal-body">
+                
+                <div class="form-group">
+                <label class="naming">View Name</label>
+                <input name="viewName" type="text" class="form-control" style="width: 500px;  "placeholder="Enter View Name(Required)" [(ngModel)]="saveProject" required>
+                </div>          
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary modalButton" (click)="saveJSONFile()" data-dismiss="modal" value="Create">
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End of Create Template Modal -->
+
+<!-- Export template modal. -->
+<!--MODAL-->
+<div class="modal fade" id="modalExport" role="dialog">
+    <div class="modal-dialog">
+                    
+        <!--MODAL CONTENT-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                <h4 class="modal-title">Export Template</h4>
+            </div>
+            <div class="modal-body">
+                <p class="naming">Template Name
+                <label title="required" style="color:red; font-size:18px">*</label></p>
+              <input name="templateName" [(ngModel)]='templateName' type="text" style="width: 500px; "placeholder="Enter Template Name(Required)" required></div>
+<div class="modal-footer">             <button type="button" class="btn btn-primary modalButton" (click)="addTemplatetoJson('Templates',templateName)" data-dismiss="modal">Export</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End of Export Modal.-->
+
+<!-- Html Template Modal -->
+<!--MODAL-->
+<div class="modal fade " id="modalHtml" role="dialog" >
+    <div class="modal-dialog modalDimension">
+                    
+        <!--MODAL CONTENT-->
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times pull-right" aria-hidden="true"></i>
+                </button>
+                <h4 class="modal-title">HTML Code Preview</h4>
+            </div>
+            <div class="modal-body modalDimension">
+                <pre class="modal-scrollBar modalScrollbar"><code>{{generatedHtml}}</code></pre>                      
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info modalButton" [ngClass]="{'disabled':btnName ==='Copied'}" (click)="chageModalButton()" ngxClipboard [cbContent]="generatedHtml">{{btnName}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Html Template Modal. -->
+
+<!--Json Template Modal Content -->
+<div class="modal fade" id="modalJson" role="dialog">
+    <div class="modal-dialog modalDimension">
+                    
+        <!--MODAL CONTENT-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times  pull-right" aria-hidden="true"></i>
+                </button>
+                <h4 class="modal-title">JSON Code Preview</h4>
+            </div>
+            <div class="modal-body modalDimension">
+                <pre class="modal-scrollBar modalScrollbar"><code>{{canvasJson | json}}</code></pre>
+           
+                <!--<section [innerHtml]="generatedHtml"></section>-->
+           
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info modalButton" [ngClass]="{'disabled':btnName ==='Copied'}" (click)="chageModalButton()" ngxClipboard [cbContent]="targetBuilderTools | json">{{btnName}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Json Template Modal.-->
+<!-- End of Modal Content -->
+
+<!--Modal content for Preview-->
+<!--Modal for DESKTOP PREVIEW starts here-->
+<div class="modal fade" id="modalPreview" role="dialog">
+    <div class="modal-dialog modal-lg">
+        
+        <!--MODAL CONTENT-->
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times pull-right" aria-hidden="true"></i>
+                </button>
+                <h4 class="modal-title">Preview Page</h4>
+               
+
+            </div>
+            <div class="modal-body modal-body-preview">
+                <!--Desktop view goes here-->
+
+                <div id="exTab3" class="container-fluid">	
+
+
+
+			
+        <div class="nav">
+
+                    <div class="col-md-4 small-padding">
+                            <a class="anchorTag-Preview text-center active" href="#1b" data-toggle="tab"><i class="fa fa-desktop "></i> <span>Desktop</span></a>
+                    </div>
+
+                      <div class="col-md-4 small-padding">
+
+                           <a class="anchorTag-Preview text-center" href="#2b" data-toggle="tab"><i class="fa fa-mobile"></i> <span>Mobile</span></a>
+
+                     
+                    </div>
+
+                      <div class="col-md-4 small-padding" >
+
+                           <a class="anchorTag-Preview text-center" href="#3b" data-toggle="tab" ><i class="fa fa-tablet"></i> <span>Tablet</span></a>
+
+                    </div>
+</div>
+			<div class="tab-content clearfix col-md-12  small-padding">
+			  <div class="tab-pane active modalScrollbar scroll" id="1b">
+           <section [innerHtml]="generatedHtml | safeHtml "></section>
+				</div>
+				<div class="tab-pane modalScrollbar scroll" id="2b">
+          
+          <div class="iframePos">
+
+                        <iframe [srcdoc]="generatedHtml | safeHtml" id="previewArea" name="preview" scrolling="auto" class="iframepreviewMob">            
+                        </iframe>
+                </div>
+          
+          </div>
+        <div class="tab-pane modalScrollbar scroll" id="3b">
+         <div class="iframePosTab ">
+
+                        <iframe [srcdoc]="generatedHtml | safeHtml" id="previewArea" name="preview" scrolling="auto" class="iframepreviewTab">            
+                        </iframe>
+                </div>
+				</div>
+          
+			</div>
+  </div>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal for DESKTOP PREVIEW ends here-->
+<div class="modal fade" id="modalDesktop" role="dialog">
+    <div class="modal-dialog modal-lg">
+        
+        <!--MODAL CONTENT-->
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times icon-white" aria-hidden="true"></i>
+                </button>
+                <h4 class="modal-title">Desktop Preview</h4>
+            </div>
+            <div class="modal-body">
+                <!--Desktop view goes here-->
+                
+
+                <section [innerHtml]="generatedHtml | safeHtml "></section>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!--modal for MOBILE PREVIEW starts here-->
+<div class="modal fade" id="modalMobile" role="dialog">
+    <div class="modal-dialog modal-xs ">
+        
+        <!--MODAL CONTENT-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times pull-right" aria-hidden="true"></i>
+                </button>
+                <h4 class="modal-title">Mobile Preview</h4>
+            </div>
+            <div class="modal-body modal-xs">
+                <!--Desktop view goes here-->
+                <div class="iframePos">
+
+                        <iframe [srcdoc]="generatedHtml | safeHtml" id="previewArea" name="preview" scrolling="auto" class="iframepreviewMob">            
+                        </iframe>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+<!--modal for MOBILE PREVIEW ends here-->
+<div class="modal fade" id="modalTab" role="dialog">
+    <div class="modal-dialog modal-sm">
+        
+        <!--MODAL CONTENT-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times pull-right" aria-hidden="true"></i>
+                </button>
+                <h4 class="modal-title">Tablet Preview</h4>
+            </div>
+            <div class="modal-body modal-sm">
+                <!--Desktop view goes here-->
+                <div class="iframePosTab">
+                        <iframe [srcdoc]="generatedHtml | safeHtml" id="previewArea" name="preview" scrolling="auto" class="iframepreviewTab">            
+                        </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalOpen" role="dialog">
+    <div class="modal-dialog modal-sm">
+        
+        <!--MODAL CONTENT-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times pull-right" aria-hidden="true"></i>
+                </button>
+                <h4 class="modal-title">Project Name</h4>
+            </div>
+            <div class="modal-body modal-sm">
+                <div class="form-group">
+                    <select class="form-control"  [(ngModel)]="openProject">
+                        <option *ngFor="let attrVal of projectsArray" [ngValue]="attrVal.name">{{attrVal.name}}</option>
+                        </select>
+                </div>
+<button (click)="openJSONFile()" class="btn btn-info form-control"  data-dismiss="modal">Open Project</button>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of modal content for preview-->
+
+  
+<!-- App Swift Modal Ends Here -->
+<!-- Existing Modal Window Starts Here -->  
+    
+                <!--option Appswift-->
+<!--modal for MOBILE PREVIEW starts here-->
+
+<!--modal for MOBILE PREVIEW ends here-->
+<!--End of modal content for preview-->
+
+
+<!---->
+
+<!--<div class="list-group" *ngFor="let target of targetList">
+                    <div class="list-group-item" *ngIf = "target.name == 'Container'">
+                    
+                    <div class="panel-body" dnd-droppable (onDropSuccess)="addTo($event)" [dropZones]="['source-dropZone']" [dropEnabled]="true" id="panelId">
+                    
+                        <ul class="list-group" *ngFor="let target of targetList">
+                            <li class="list-group-item" [innerHtml]="target.templates | safeHtml">
+                            </li>
+                        </ul>
+                     </div>
+                    
+                    
+                    </div></div>-->
+                     <!--<div class="col-sm-12">
+        <div dnd-droppable class="panel panel-info" (onDropSuccess)="transferDataSuccess($event)">
+            <div class="panel-heading">Place to drop (Items:{{receivedData.length}})</div>
+            <div class="panel-body">
+                
+                <div [hidden]="!receivedData.length > 0" *ngFor="let data of receivedData" [innerHtml]="data.dragData.templates | safeHtml"></div>
+            </div>
+        </div>
+    </div>-->

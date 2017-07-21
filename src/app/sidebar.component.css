@@ -1,0 +1,151 @@
+.scrollbar {
+    height: 600px;
+    width: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+	float: left;	
+	background: rgb(34, 45,50);
+
+}
+
+
+
+.span-ab
+{
+    background-color :rgb(0,160,234);
+}
+
+.sidebar-well-ab
+{
+    background-color: rgb(34, 45,50);
+     width: 100%;
+}
+
+
+.appBuilder-scrollBar::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: rgb(82,94,100);
+	border-radius: 10px;
+}
+
+.appBuilder-scrollBar::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: rgb(82,94,100);
+}
+
+.appBuilder-scrollBar::-webkit-scrollbar-thumb
+{
+		background-color: #AAA;
+	border-radius: 10px;
+	background-image: -webkit-linear-gradient(90deg,
+	                                          rgba(0, 0, 0, .2) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(0, 0, 0, .2) 50%,
+											  rgba(0, 0, 0, .2) 75%,
+											  transparent 75%,
+											  transparent)
+}
+
+
+.no-select {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE/Edge */
+  user-select: none;
+  /* non-prefixed version, currently
+     not supported by any browser */
+}
+
+
+ngx-dnd-item {
+    margin: 5px !important; 
+    padding: 10px !important;
+    background-color: #384247 !important;
+    /* -webkit-transition: opacity 0.4s ease-in-out; */
+    /* transition: opacity 0.4s ease-in-out; */
+    border: 1px solid whitesmoke !important;
+    display: block !important;
+    background-color: white !important; 
+}
+
+
+div.ngx-dnd-container {
+    color:black;
+    background-color: white;
+    border: 1px solid #384247 !important;
+    margin: 2px !important;
+    padding: 2px !important;
+}
+
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: white;
+    
+}
+
+.panel-group .panel-heading+.panel-collapse>.list-group, .panel-group .panel-heading+.panel-collapse>.panel-body
+
+{
+    border-top:1px solid #384247;
+}
+
+.panel-default{
+    border-color: rgb(34, 45,50);
+}
+.panel-default>.panel-heading {
+    color: rgb(34, 45,50);
+    background-color: rgb(82,94,100);
+    border-color: rgb(82,94,100); 
+}
+
+.panel-heading1 {
+    color: green;
+    background-color: redq;
+    border-color: rgb(82,94,100); 
+}
+
+
+
+
+.panel-body {
+    background-color:rgb(34, 45,50);
+    padding: 0px;
+}
+
+.appBuilder-anchorText{
+
+    color:white;
+
+}
+
+.appBuilder-anchorText:hover
+{
+
+    color:white;
+
+}
+
+.appBuilder-anchorText:active
+{
+
+    color:white;
+
+}
+.appBuilder-anchorText:visited
+{
+
+    color:white;
+
+}

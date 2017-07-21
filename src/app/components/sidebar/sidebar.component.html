@@ -1,0 +1,88 @@
+<div class="scrollbar appBuilder-scrollBar">
+<input type="text" placeholder="Search Html Elements" class="form-control" [(ngModel)]="queryString" id="search">
+
+   <div *ngFor="let element of sideBarHtmlItems">
+   <span *ngIf="queryString">
+    
+          <ngx-dnd-container
+            [model]="element.items"
+            
+            [dropZones]="['builder-target']"
+            [copy]="true"
+            >
+            <ng-template let-item="model">   
+               
+                  <span>{{item.name}}</span>
+                
+            </ng-template>
+            
+          </ngx-dnd-container>       
+     
+   </span>
+</div>
+
+  <div *ngIf="!queryString" class="panel-group" id="accordion">
+    <div class="panel panel-default accordion-Colour" *ngFor="let element of sideBarHtmlItems" style="margin-bottom:-6px;">
+      <div class="panel-heading accordion-Colour">
+        <h4 class="panel-title">
+        <i [ngClass]="element.icons"></i>  <a class="" data-toggle="collapse" data-parent="#accordion" href="#{{(element.key).replace(' ', '')}}">{{element.key}}<span class="glyphicon glyphicon-plus" style="float:right;"></span></a>  
+        </h4>
+      </div>
+      <div id="{{(element.key).replace(' ', '')}}" class="panel-collapse collapse">
+       
+          <ngx-dnd-container
+            [model]="element.items"
+            [dropZones]="['builder-target']"
+            [copy]="true"
+            >
+            <ng-template let-item="model">            
+              <span>{{item.name}}</span>
+            </ng-template>
+          </ngx-dnd-container>
+        
+      </div>
+    </div>
+         <!--<accordion [showArrows]="true" [closeOthers]="true" >
+             <accordion-group  *ngFor="let element of sourceBuilderTools;let i=index;" ngDefaultControl [ngModel]="element"> 
+               <accordion-heading>
+                
+                   <span><i [ngClass]="element.icons"></i> <accordion-toggle ><a href="#" [ngClass]="'appBuilder-anchorText'">{{element.key}}</a></accordion-toggle></span> 
+                
+            
+        </accordion-heading>
+             <ngx-dnd-container
+            [model]="element.items"
+            [dropZones]="['builder-target']"
+            [copy]="true"
+            >
+            <ng-template let-item="model">            
+              <span>{{item.name}}</span>
+            </ng-template>
+          </ngx-dnd-container>
+             </accordion-group>
+         </accordion>-->
+<!--<div class="ngx-dnd-container" ngxDroppable dropZone="builder-target" [model]="element.items" [copy]="true">
+
+  
+           <div  class="ngx-dnd-item" ngxDraggable
+    *ngFor="let item of element.items"
+    >{{item.name}}</div>
+  </div>-->  
+
+<!--
+         <div *ngFor="let element of sourceBuilderTools;let i=index;">
+
+          <span><i [ngClass]="element.icons"></i><a href="#" [ngClass]="'appBuilder-anchorText'">{{element.key}}</a></span> 
+
+<ngx-dnd-container
+            [model]="element.items"
+            [dropZones]="['builder-target']"
+            [copy]="true"
+            >
+            <ng-template let-item="model">            
+              <span>{{item.name}}</span>
+            </ng-template>
+          </ngx-dnd-container>
+        </div> 
+
+</div>-->

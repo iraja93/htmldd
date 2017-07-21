@@ -1,0 +1,16 @@
+.appbuilder-footer
+{
+    background-color: black;
+}
+
+.appbuilder-header
+{
+   background-color: #00AEEF;
+   
+}
+
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}

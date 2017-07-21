@@ -1,0 +1,866 @@
+.panel-body-canvas{
+    height: 550px;
+    width: auto;
+}
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+.panel-heading{
+    background:#222D32;
+    height: 44px;
+}
+/*Positioning for icons on navbar*/
+.icon-white{
+    padding: 5px 25px 5px 0;
+    color:white;
+    text-decoration: none;
+}
+
+/*Scroll property for canvas*/
+.scroll {
+    height: 500px;
+    width: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/*Scroll property for modal-content*/
+
+pre{
+    display:block;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.428;
+    color:#333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5 !important;
+    border: 1px solid #ccc;
+    border-radius: 4px;  
+}
+
+.modal-scrollBar{
+  height: 400px;
+    width: 570px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  		
+
+      
+}
+
+.modalScrollbar::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: rgb(82,94,100);
+	border-radius: 10px;
+}
+
+.modalScrollbar::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: rgb(82,94,100);
+}
+
+.modalScrollbar::-webkit-scrollbar-thumb
+{
+    background-color: #AAA;
+	border-radius: 10px;
+	background-image: -webkit-linear-gradient(90deg,
+        rgba(0, 0, 0, .2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(0, 0, 0, .2) 50%,
+        rgba(0, 0, 0, .2) 75%,
+        transparent 75%,
+        transparent)
+}
+
+.no-select {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE/Edge */
+  user-select: none;
+  /* non-prefixed version, currently
+     not supported by any browser */
+}
+/*Alignment of MODAL*/
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: top;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+/*Alignment ends here*/
+
+/*CSS for MODAL*/
+.modalDimension {
+    height : auto !important;
+    width : 600px;
+}
+
+.modal-header{
+    color: white;
+    background-color: #222D32;
+    padding:15px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.naming{
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.modalButton{
+    background-color: #00AEEF;
+}
+
+
+/*CSS ends here*/
+
+
+/*Modal CSS for Preview starts here*/
+.modal-lg{
+    height:auto;
+    width:1300px;
+    max-height: 600px;
+}
+
+.modal-xs
+{
+  
+  height: auto;
+  width: 380px;
+  
+}
+
+.modal-sm
+{
+  
+  height: auto;
+  width: 480px;
+  
+}
+
+
+.iframepreviewMob {
+    background: white;
+    width: 210px;
+    height: 370px;
+    position: relative;
+    top: 13%;
+    left:0.5%
+    
+    
+}
+
+
+.iframepreviewTab {
+    background: grey;
+    width: 520px;
+    height: 390px;
+    position: relative;
+    top: 11.1%;
+    left:0.4%;
+   
+}
+
+.iframePos {
+    height: 500px;
+    text-align: center;
+    width: 100%;
+    background: url("/../assets/images/iPhone.png") center center no-repeat;
+  /*background-image: url('/../assets/images/iPhone.png');*/
+}
+
+
+.iframePosTab {
+    height: 500px;
+    text-align: center;
+    width: 100%;
+    background: url("/../assets/images/iPad.png") center center no-repeat;
+
+  /*background-image: url('/../assets/images/iPhone.png');*/
+}
+
+.modal-header {
+  height:50px;
+}
+
+
+/*.modal-dialog{
+    position: relative;
+    display: table; 
+    overflow-y: auto;    
+    overflow-x: auto;
+    width: auto;
+    min-width: 300px;   
+}*/
+
+
+/*Modal CSS for Preview ends here*/
+
+
+/**
+ * Navigation
+ */
+.nav-col {
+  color: #fff;
+  background: red
+  ;
+}
+.nav-col a {
+  color: #fff;
+}
+.nav-col h1 {
+  display: block;
+  background: #5b6882;
+  padding: 0 15px;
+  line-height: 50px;
+  margin: 0;
+}
+.nav-col nav {
+  margin: 20px 15px;
+}
+.nav-col nav li {
+  padding: .1rem 0;
+}
+.nav-col nav ul ul {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  font-size: .9em;
+}
+.nav-col nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.wrapper {
+  width: 100%;
+  padding: 0 30px;
+}
+
+
+
+.builder .ngx-dnd-item {
+  font-size: 16px;
+}
+.builder .builder-source .ngx-dnd-container {
+  border: none;
+  padding: 5px;
+}
+.builder .builder-target .ngx-input {
+  margin: 0;
+}
+.builder .builder-target .ngx-input .ngx-input-wrap {
+  margin: 0;
+}
+.builder .builder-target .ngx-dnd-container {
+  justify-content: space-between;
+  flex-flow: row wrap;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  box-sizing: border-box;
+  border: 2px dotted transparent;
+}
+.gu-unselectable .builder .builder-target .ngx-dnd-container, .builder .builder-target .ngx-dnd-container.gu-over, .builder .builder-target .ngx-dnd-container.gu-over .ngx-dnd-container {
+  border: 2px dotted orange;
+}
+.builder .builder-target .ngx-dnd-container .ngx-dnd-item {
+  margin: 5px 1%;
+  border: 1px solid transparent;
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  -webkit-box-flex: 1;
+  max-width: 100%;
+}
+.builder .builder-target .ngx-dnd-container .ngx-dnd-item.half {
+  flex: 1 1 48%;
+  box-sizing: border-box;
+  -webkit-box-flex: 1;
+  max-width: 48%;
+}
+.builder .builder-target .ngx-dnd-container .ngx-dnd-item.gu-transit,
+.builder .builder-target .ngx-dnd-container .ngx-dnd-item:hover {
+  border: 1px solid #1786e9;
+}
+
+
+
+.half{
+  flex: 1 1 48%;
+  box-sizing: border-box;
+  -webkit-box-flex: 1;
+  max-width: 48%;
+}
+
+
+.ngx-dnd-container {
+  background-color: red;
+  border: 2px solid blue;
+
+}
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+
+
+.div.ngx-dnd-container {
+    background-color: pink;
+    border: 1px solid green !important;
+    margin: 2px !important;
+    padding: 2px !important;
+}
+
+ngx-dnd-item {
+    margin: 5px !important; 
+    padding: 10px !important;
+    background-color: rgba(0, 0, 0, 0.0) !important;
+    /* -webkit-transition: opacity 0.4s ease-in-out; */
+    /* transition: opacity 0.4s ease-in-out; */
+    border: 1px solid yellow !important;
+    display: block !important;
+    background-color: red !important; 
+}
+
+.canvas-text
+{
+  font-size:10px;
+  color:plum;
+}
+
+.ngx-dnd-item.myRow
+{
+   background-color: lightblue;
+}
+
+/*.myRow
+{
+   background-color: lightblue;
+}
+.column {
+    background-color: #F5F5F5;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 13px rgba(0, 0, 0, .1);
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    position: relative;
+    padding: 3px 5px 0;
+}
+.column-6 {
+    margin: 0.5%;
+    width: 49%;
+    float: left;
+}
+.column-4 {
+    margin: 0.66%;
+    width: 32%;
+    float: left;
+}
+.column-2 {
+    margin: 0.33%;
+    width: 16%;
+    float: left;
+}
+.column-8 {
+    margin: 0.66%;
+    width: 65%;
+    float: left;
+}
+.rowFullWidth {
+    margin: 0.5%;
+    width: 99%;
+    float: left;
+}
+.column-10 {
+    margin: 0.25%;
+    width: 82%;
+    float: left;
+}*/
+
+/* Preview Button CSS */
+.btn-preview-color
+{
+ background-color: #00AEEF;
+ color:white;
+}
+
+.fa-times{
+  color:white;
+
+}
+
+
+/*Appbulider CSS*/
+.scrollbar {
+    height: 600px;
+    width: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+	float: left;	
+	background: rgb(34, 45,50);
+
+}
+
+
+
+.appBuilder-scrollBar::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: rgb(82,94,100);
+	border-radius: 10px;
+}
+
+.appBuilder-scrollBar::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: rgb(82,94,100);
+}
+
+.appBuilder-scrollBar::-webkit-scrollbar-thumb
+{
+		background-color: #AAA;
+	border-radius: 10px;
+	background-image: -webkit-linear-gradient(90deg,
+	                                          rgba(0, 0, 0, .2) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(0, 0, 0, .2) 50%,
+											  rgba(0, 0, 0, .2) 75%,
+											  transparent 75%,
+											  transparent)
+}
+
+
+.no-select {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE/Edge */
+  user-select: none;
+  /* non-prefixed version, currently
+     not supported by any browser */
+}
+/*App builder css ends here*/
+
+/* property area css starts here*/
+.propScrollbar {
+    height: 600px;
+    width: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+	float: right;	
+	background: #384247/*rgb(44,49,52)*/;   
+}
+.propScrollbar div{
+    direction:ltr;
+}
+.property-scrollBar::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: rgb(82,94,100);
+	border-radius: 10px;
+}
+
+.property-scrollBar::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: rgb(82,94,100);
+}
+
+.property-scrollBar::-webkit-scrollbar-thumb
+{
+    background-color: #AAA;
+	border-radius: 10px;
+	background-image: -webkit-linear-gradient(90deg,
+	                                          rgba(0, 0, 0, .2) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(0, 0, 0, .2) 50%,
+											  rgba(0, 0, 0, .2) 75%,
+											  transparent 75%,
+											  transparent)
+}
+
+ul.nav.nav-tabs > li > a {
+    font-size: 16px;    
+}
+
+.nav-tabs li a:hover {
+    background-color: #222D32;
+    color: white;
+    border-color: #222D32;
+}
+.nav.nav-tabs{
+    background-color:#384247; 
+    border-bottom: 0px solid rgb(82,94,100); 
+    padding : 0px 0px 0px 4px; 
+}
+
+ul.nav.nav-tabs {
+    height: 50px;
+    width: 100%;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #00a0ea;
+    cursor: default;
+    background-color:#3d535c;
+    border: 0px none;
+    border-bottom-color:1px solid #00a0ea;
+}
+.tab-content{
+      padding: 0px 5px 0px 5px;  
+    width:100%;
+}
+
+.icons{
+    color:white;
+    text-decoration: none;
+}
+.nav-tabs.nav-justified>li>a{
+    border-bottom: 0px none;
+    background-color: #222D32;
+}
+
+
+/* property area css ends here*/
+
+.panel.with-nav-tabs .panel-heading{
+    padding: 5px 5px 0 5px;
+}
+.panel.with-nav-tabs .nav-tabs{
+	border-bottom: none;
+}
+.panel.with-nav-tabs {
+	margin-bottom: -1px;
+}
+/********************************************************************/
+/*** PANEL DEFAULT ***/
+.with-nav-tabs.panel-default .nav-tabs > li > a,
+.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+    color: #777;
+}
+.with-nav-tabs.panel-default .nav-tabs > .open > a,
+.with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+    color: #777;
+	background-color: #ddd;
+	border-color: transparent;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.active > a,
+.with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+	color: #555;
+	background-color: #fff;
+	border-color: #ddd;
+	border-bottom-color: transparent;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a {
+    color: #777;   
+}
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+    background-color: #ddd;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: #555;
+}
+
+.small-padding {
+   padding: 4px !important;
+}
+
+.modal-body-preview
+{
+    padding: 1px;
+}
+
+
+.button-canvas{
+ background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color:white;   
+}
+
+.button-canvas-preview
+{
+background-color: #00AEEF;
+height:25px;
+width: 60px;
+margin:0; 
+  padding:0;  
+}
+
+
+
+.button-canvas-preview:visited 
+{
+background-color: #00AEEF;
+}
+
+
+.button-canvas-preview:hover 
+{
+background-color: #00AEEF;
+}
+
+.button-canvas-preview:focus 
+{
+background-color: #00AEEF;
+}
+
+.anchorTag-Preview
+{
+    display:block;
+    border: 1px solid #e3e3e3;
+    background-color: #f5f5f5;
+    border-radius: 3px;
+}
+
+.anchorTag-Preview-Active
+{
+    display:block;
+    border: 1px solid #e3e3e3;
+    background-color: #00AEEF;
+    border-radius: 3px;
+}
+
+/*For Item Border*/
+.selectborder {
+    border: 1px dashed #00a0ea !important;
+}
+.item {
+    border: 1px dashed #ccc;
+   
+}
+.span-notSelect
+{
+    color:#ccc;
+    font-size: 12px;
+}
+
+.span-selected
+{
+    color:#00a0ea;
+    font-size: 12px;
+}
+
+/* Css For Toogle Button */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 20px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 16px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #00AEEF;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #00AEEF;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* End of Toggle Button CSS*/
+
+/* Responsive Visibility Table Border Css */
+
+.borderless td, .borderless th, .borderless thead,.borderless tbody  {
+    border: none !important;
+}
+
+/* End of Responsive Visibility Table Border Css*/
+
+/* Accordion Css For Responsive Visibility */
+.panel-head {
+  background-color: #384247;
+  border:none;
+  position: relative;
+}
+.panel{
+  border-color:#384247;
+}
+.panel-head[data-toggle="collapse"]:after {
+  font-family: 'Glyphicons Halflings';
+  content: "\e072"; /* "play" icon */
+  position: absolute;
+  color:white;
+  font-size: 10px;
+  line-height: 20px;
+  right: 20px;
+  top: calc(50% - 10px);
+
+  /* rotate "play" icon from > (right arrow) to down arrow */
+  -webkit-transform: rotate(-90deg);
+  -moz-transform:    rotate(-90deg);
+  -ms-transform:     rotate(-90deg);
+  -o-transform:      rotate(-90deg);
+  transform:         rotate(-90deg);
+}
+.panel-head[data-toggle="collapse"].collapsed:after {
+  /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+  -webkit-transform: rotate(90deg);
+  -moz-transform:    rotate(90deg);
+  -ms-transform:     rotate(90deg);
+  -o-transform:      rotate(90deg);
+  transform:         rotate(90deg);
+}
+/* End Of Accordion Css */
+
+
+/* Property Bar CSS */
+
+/* Css for Mode-Modals*/
+.logo{
+    width: 159px;
+  	margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    margin-left: 0px;
+  }
+.appModal{
+    color: white;
+    background-color: #222D32;
+    padding:10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.mainApp li i{
+  font-size: 50px;
+}
+.mainApp li{
+    text-align: center;
+    display: inline-block;
+    width: 24%;
+    padding: 10px 5px;
+}
+.float-right{
+    float:right !important;
+    }
+.formAlign{
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 15px;  
+}
+ul,li{
+    list-style-type: none;
+}
+.selectWorkspace{
+    padding-top: 20px;
+}
+.selectProject {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.form-control {
+    display: block;
+    width: 500px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    }
+
+.basicBtn{
+        background: transparent;
+        outline: none;
+    }
+
+
+/*End Of Mode-Modals*/
